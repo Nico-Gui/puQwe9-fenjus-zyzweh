@@ -1,9 +1,9 @@
 """
 Usage:
-    python3 -m split_dataset COLUMN_NAME [--input dataset.csv] [--outdir splits]
+    python3 -m split_dataset PATH_TO_FILE COLUMN_NAME TARGET_DIRECTORY
 
 Example:
-    python3 -m split_dataset city --input traffic_data.csv --outdir splits
+    python3 -m split_dataset city traffic_data.csv city_name traffic_data
 """
 
 import sys
@@ -39,23 +39,19 @@ def ensure_dir_and_gitignore(dir_path):
 
 
 def main():
-	if len(sys.argv) < 3:
-		print("Error: You must specify the column name to split on, and the dataset to be loaded")
+	if len(sys.argv) < 4:
+		print("Error: You must specify the column name to split on, the path to the dataset and the target directory")
 		print(__doc__)
 		sys.exit(1)
 
+	target_dir = sys.argv[3]
 	colname = sys.argv[2]
 	data_set = sys.argv[1]
 
 	# Optional arguments
 	input_file = data_set
-	output_dir = data_set.replace(".csv", "").replace("dataset/", "")
-	ensure_dir_and_gitignore(output_dir, ".gitignore")
-	if "--input" in sys.argv:
-		input_file = sys.argv[sys.argv.index("--input") + 1]
-
-	if "--outdir" in sys.argv:
-		output_dir = sys.argv[sys.argv.index("--outdir") + 1]
+	output_dir = target_dir
+	ensure_dir_and_gitignore(output_dir)
 
 	# Create output directory if it doesn't exist
 	os.makedirs(output_dir, exist_ok=True)
@@ -75,7 +71,7 @@ def main():
 	for val in unique_vals:
 		subset = df[df[colname] == val]
 		safe_val = str(val).replace(" ", "_").replace("/", "-")
-		outfile = os.path.join(output_dir, f"{colname}_{safe_val}.csv")
+		outfile = os.path.join(output_dir, f"{safe_val}_{input_file.rsplit('/', 1)[-1]}")
 		subset.to_csv(outfile, index=False)
 		print(f"  Saved {len(subset)} rows to {outfile}")
 

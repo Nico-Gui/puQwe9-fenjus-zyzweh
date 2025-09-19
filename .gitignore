@@ -1,4 +1,5 @@
 dataset/**
 .DS_Store
-utd19_u/
 __pycache__
+utd19_u/
+utb19_u/

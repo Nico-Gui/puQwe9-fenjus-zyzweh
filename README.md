@@ -17,3 +17,5 @@ python3 -m split_dataset dataset_location column_name
 for example:
 python3 -m split_dataset dataset/utd19_u.csv city
 ```
+
+
