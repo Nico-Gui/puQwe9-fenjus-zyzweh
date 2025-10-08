@@ -2,4 +2,6 @@ dataset/**
 .DS_Store
 __pycache__
 utd19_u/
-utb19_u/
+utd19_u_results/**
+!utd19_u_results/city_summary.csv
+
