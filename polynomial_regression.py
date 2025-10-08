@@ -64,10 +64,10 @@ def make_data_cycle(df, row, period):
 def get_features_and_labels(df, target_column="flow"):
 	print(df.head(1))
 
-	X = df.drop(columns=["flow", "occ", "long_y", "lat_y", "pos", "length", "Unnamed: 0", "day_of_week_sin", "day_of_year_sin", "day_of_week_cos", "day_of_year_cos"])
+	# X = df.drop(columns=["flow", "occ", "long_y", "lat_y", "pos", "length", "Unnamed: 0", "day_of_week_sin", "day_of_year_sin", "day_of_week_cos", "day_of_year_cos"])
 	# X = df.drop(columns=["flow", "occ", "long_y", "lat_y", "pos", "length", "Unnamed: 0"])
 	# X = df.drop(columns=["flow", "occ", 7"long_y", "lat_y", "Unnamed: 0"])
-	# X = df.drop(columns=["flow", "occ", "Unnamed: 0"])
+	X = df.drop(columns=["flow", "occ", "Unnamed: 0"])
 	y = df[target_column]
 	# show density of one feature
 	# sns.kdeplot(df[target_column], fill=True)
